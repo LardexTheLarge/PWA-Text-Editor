@@ -21,7 +21,24 @@ module.exports = () => {
       new HtmlWebpackPlugin({
         template: "./index.html",
       }),
-      new WebpackPwaManifest({}),
+
+      new WebpackPwaManifest({
+        icons: [
+          {
+            src: path.resolve("src/images/logo.png"),
+            sizes: [96, 128, 192, 256, 384, 512],
+            destination: path.join("assets", "icons"),
+          },
+        ],
+        name: "Text-Editor",
+        short_name: "J.A.T.E",
+        orientation: "portrait",
+        display: "standalone",
+        start_url: "./",
+        description: "Just Another Text Editor",
+        background_color: "#020DFF",
+        theme_color: "#020DFF",
+      }),
     ],
 
     module: {
