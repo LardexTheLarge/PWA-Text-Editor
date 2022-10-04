@@ -23,9 +23,20 @@ module.exports = () => {
       }),
       new InjectManifest({
         swSrc: "./src-sw.js",
-        swDest: "service-worker.js",
+        swDest: "src-sw.js",
       }),
+
       new WebpackPwaManifest({
+        inject: true,
+        name: "Text-Editor",
+        short_name: "J.A.T.E",
+        orientation: "portrait",
+        display: "standalone",
+        start_url: "/",
+        publicPath: "/",
+        description: "Just Another Text Editor",
+        background_color: "#020DFF",
+        theme_color: "#020DFF",
         icons: [
           {
             src: path.resolve("src/images/logo.png"),
@@ -33,14 +44,6 @@ module.exports = () => {
             destination: path.join("assets", "icons"),
           },
         ],
-        name: "Text-Editor",
-        short_name: "J.A.T.E",
-        orientation: "portrait",
-        display: "standalone",
-        start_url: "./",
-        description: "Just Another Text Editor",
-        background_color: "#020DFF",
-        theme_color: "#020DFF",
       }),
     ],
 
@@ -49,6 +52,10 @@ module.exports = () => {
         {
           test: /\.css$/i,
           use: ["style-loader", "css-loader"],
+        },
+        {
+          test: /\.(png|svg|jpg|jpeg|gif)$/i,
+          type: "asset/resource",
         },
         {
           test: /\.m?js$/,
