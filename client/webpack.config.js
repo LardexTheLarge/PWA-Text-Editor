@@ -27,13 +27,14 @@ module.exports = () => {
       }),
 
       new WebpackPwaManifest({
+        fingerprints: false,
         inject: true,
         name: "Text-Editor",
         short_name: "J.A.T.E",
         orientation: "portrait",
         display: "standalone",
-        start_url: "/",
-        publicPath: "/",
+        start_url: "./",
+        publicPath: "./",
         description: "Just Another Text Editor",
         background_color: "#020DFF",
         theme_color: "#020DFF",
@@ -55,10 +56,7 @@ module.exports = () => {
         },
         {
           test: /\.(png|svg|jpg|jpeg|gif)$/i,
-          loader: "file-loader",
-          options: {
-            outputPath: "src/images",
-          },
+          type: "asset/resource",
         },
         {
           test: /\.m?js$/,

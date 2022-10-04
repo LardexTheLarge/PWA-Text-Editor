@@ -28,12 +28,16 @@ registerRoute(({ request }) => request.mode === "navigate", pageCache);
 
 //Implement asset caching with the cache name and using a call back to request the js and css
 registerRoute(
-  ({ request }) => ["style", "script", "worker"].includes(request.destination),
+  ({ request }) =>
+    ["style", "script", "worker", "image"].includes(request.destination),
   new StaleWhileRevalidate({
-    cacheName: "assets-cache",
+    cacheName: "asset-cache",
     plugins: [
       new CacheableResponsePlugin({
         statuses: [0, 200],
+      }),
+      new ExpirationPlugin({
+        maxAgeSeconds: 30 * 24 * 60 * 60,
       }),
     ],
   })
